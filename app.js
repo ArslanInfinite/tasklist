@@ -41,6 +41,8 @@ function addTask(event){
 // remove task
 function removeTask(event){
     if(event.target.parentElement.classList.contains('delete-item')) {
+        if(confirm('Are you sure?')) {
         event.target.parentElement.parentElement.remove()
+        }
     }
 }
