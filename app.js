@@ -8,10 +8,14 @@ const taskInput = document.querySelector('#task')
 // Loading event listeners 
 loadeventlisteners()
 
-// Create a function that adds an eventlistener to the form which activates on submit and triggers the addTask function
+// Create a function that loads all eventlisteners 
 function loadeventlisteners(){
+// add eventlistener to the form which activates on submit and triggers the addTask function
     form.addEventListener('submit', addTask)
+// remove task event
     taskList.addEventListener('click', removeTask)
+// remove all tasks event 
+    clearButton.addEventListener('click', clearTasks)
 }
 // addTask function checks if the value the input is empty or not if it is, an alert will pop up
 function addTask(event){
@@ -38,7 +42,7 @@ function addTask(event){
     event.preventDefault()
 }
 
-// remove task
+// remove a task
 function removeTask(event){
     if(event.target.parentElement.classList.contains('delete-item')) {
         if(confirm('Are you sure?')) {
@@ -46,3 +50,15 @@ function removeTask(event){
         }
     }
 }
+
+// remove all tasks
+// look up why this does not need an 'event' argument 
+function clearTasks() {
+// while the taskList has a child element, remove that child until nothing is left
+    while(taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild)
+    }
+}
+
+
+
