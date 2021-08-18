@@ -62,18 +62,18 @@ function clearTasks() {
     }
 }
 
-// filter tasks 
-function filterTasks(event){
+// filter Tasks
+function filterTasks(event) {
 // set a variable to equal the value of the target of the event, converted to lower case
-    const userInput = event.target.value.toLowercase()
+    const userInput = event.target.value.toLowerCase();
 // selecting all elements with a class of 'collection-item, iterating through it
-//querySelectorAll returns a NodeList, array methods can be used on it
+// querySelectorAll returns a NodeList, array methods can be used on it
     document.querySelectorAll('.collection-item').forEach(function(task){
-        const item = task.firstChild.textContent
-        if(item.toLowerCase().indexOf(text) != -1){
-            task.style.display = 'block'
-        } else {
-            task.style.display = 'none'
-        } 
-    })
-}
+      const item = task.firstChild.textContent;
+      if(item.toLowerCase().indexOf(userInput) != -1){
+        task.style.display = 'block';
+      } else {
+        task.style.display = 'none';
+      }
+    });
+  }
