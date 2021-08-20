@@ -39,9 +39,23 @@ function addTask(event){
     li.appendChild(link)
 // appending the li to the ul
     taskList.appendChild(li)
+// storing data in local storage 
+    storeTaskInLocalStorage()
+
 // clear input by making the default to a string
     taskInput.value = ''
-    event.preventDefault()
+    event.preventDefault(taskInput.value)
+}
+
+// store task in local storage
+
+function storeTaskInLocalStorage(task){
+    let tasks
+    if(localStorage.getItem('tasks') === null){
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+    }
 }
 
 // remove a task
@@ -77,3 +91,4 @@ function filterTasks(event) {
       }
     });
   }
+
