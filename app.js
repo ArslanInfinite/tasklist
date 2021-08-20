@@ -10,6 +10,8 @@ loadeventlisteners()
 
 // Create a function that loads all eventlisteners 
 function loadeventlisteners(){
+// DOM load event
+    document.addEventListener('DOMContentLoaded', getTasks)
 // add eventlistener to the form which activates on submit and triggers the addTask function
     form.addEventListener('submit', addTask)
 // remove task event
@@ -19,6 +21,27 @@ function loadeventlisteners(){
 // filter all tasks based on user input
     filter.addEventListener('keyup', filterTasks)
 }
+
+// Get tasks from local storage if they were there already
+function getTasks() {
+    let tasks
+    if(localStorage.getItem('tasks') === null){
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+    }
+    tasks.forEach(function(task){
+        const li = document.createElement('li')
+            li.className = 'collection-item'
+            li.appendChild(document.createTextNode(task))
+            const link = document.createElement('a')
+            link.className = 'delete-item secondary-content'
+            link.innerHTML = '<i class="fa fa-remove"></i>'
+            li.appendChild(link)
+            taskList.appendChild(li)
+    })
+}
+
 // addTask function checks if the value the input is empty or not if it is, an alert will pop up
 function addTask(event){
     if(taskInput.value === ''){
@@ -40,7 +63,7 @@ function addTask(event){
 // appending the li to the ul
     taskList.appendChild(li)
 // storing data in local storage 
-    storeTaskInLocalStorage()
+    storeTaskInLocalStorage(taskInput.value)
 
 // clear input by making the default to a string
     taskInput.value = ''
@@ -48,7 +71,6 @@ function addTask(event){
 }
 
 // store task in local storage
-
 function storeTaskInLocalStorage(task){
     let tasks
     if(localStorage.getItem('tasks') === null){
@@ -57,7 +79,6 @@ function storeTaskInLocalStorage(task){
         tasks = JSON.parse(localStorage.getItem('tasks'))
     }
     tasks.push(task)
-
     localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
