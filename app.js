@@ -62,7 +62,7 @@ function addTask(event){
     li.appendChild(link)
 // appending the li to the ul
     taskList.appendChild(li)
-// storing data in local storage 
+// storing data in local storage, the argument it is given is the user input that was appended to the DOM
     storeTaskInLocalStorage(taskInput.value)
 
 // clear input by making the default to a string
@@ -73,12 +73,16 @@ function addTask(event){
 // store task in local storage
 function storeTaskInLocalStorage(task){
     let tasks
+// if there is currently nothing stored, tasks will be set to an empty array
     if(localStorage.getItem('tasks') === null){
         tasks = []
     } else {
+// if there is something stored, it will be stored as a JSON object, not just a string
         tasks = JSON.parse(localStorage.getItem('tasks'))
     }
+// adding the new task to the local storage array of tasks
     tasks.push(task)
+// converting the item back into a string, JSON.stringify(tasks) actually allows that array to be saved to local storage
     localStorage.setItem('tasks', JSON.stringify(tasks))
 }
 
@@ -119,7 +123,6 @@ function clearTasks() {
 // clear tasks from local storage
     clearTasksFromLocalStorage()
 }
-
 function clearTasksFromLocalStorage() {
     localStorage.clear()
 }
@@ -139,4 +142,3 @@ function filterTasks(event) {
       }
     });
   }
-
